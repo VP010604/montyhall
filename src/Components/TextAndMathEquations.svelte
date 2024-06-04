@@ -5,26 +5,68 @@
 <section id = "body">
 <h1 class="body-header">The Math of The Monty Hall Problem</h1>
 <p class="body-text">
-  Suppose you're on a game show, and you're given the choice of three doors:
-  Behind one door is a car; behind the others, goats. You pick a door, say No. 1,
-  and the host, who knows what's behind the doors, opens another door, say No. 3, 
-  which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it to your 
-  advantage to switch your choice?
+  The problem clearly elucidates the idea of <b>conditional probability</b>. 
+  As the name suggests, conditional probability involves using knowledge you <b>currently have</b> to predict the probability of a future event.
 </p>
 <p class="body-text">
-  When the player first makes their choice, there is a 
-2
-/
-3
- chance that the car is behind one of the doors not chosen. This probability does not change after the host reveals a goat behind one of the unchosen doors. When the host provides information about the two unchosen doors (revealing that one of them does not have the car behind it), the 
-2
-/
-3
- chance of the car being behind one of the unchosen doors rests on the unchosen and unrevealed door, as opposed to the 
-1
-/
-3
- chance of the car being behind the door the contestant chose initially.
+  First, let's navigate the problem intuitively. Let's assume you pick door 1. The probability that the car lies behind door 1 is <b>1/3</b>,
+  and that it's not behind it (i.e. behind one of the other 2 doors) is <b>2/3</b>.
+  Now, assume that the host, Monty Hall, opens door number 2.
+  This new information does not mean the probability is split between door 1 and door 3 (i.e. that there is a <b>50-50</b> probability),
+  but that the initial <b>2/3</b> probability of the car being behind door 2 or door 3 is now a <b>2/3</b> probability of the car being behind <b> only door 3</b>.
+</p>
+<p class="body-text">
+  Now, let's try and visualize this using conditional probability. The core formula we will use here is : {@html katexify(
+    "P(A|B)=\\frac{\P(B|A)\P(A)}{P(B)}",
+    true
+  )}
+  This formula is known as Bayes' Theorem and defines how the probability of an event changes knowing information about another related event.
+  For our purposes, let's define the 3 events as follows : {@html katexify(
+    "\P(A) = \P(B) = \P(C) = 1/3",
+    true
+  )}
+  This defines the probability of the contestant winning the car by choosing either one of 3 doors.
+  For our purposes, <b>Let's assume the contestant has picked door A.</b>
+  Next, <b>Let's assume the host opens door B.</b> We define this event as HB. The formula for this event is <b>dependent on the 3 doors.</b> Therefore : {@html katexify(
+    "\P(HB|A) = 1/2",
+    true
+  )}
+  wherein the other half is the event that the host chooses to open door C - HC. Further, we have : {@html katexify(
+    "\P(HB|B) = 0",
+    true
+  )}
+  wherein the host would not open door B if the car was indeed behind door B. Finally, we have : {@html katexify(
+    "\P(HB|C) = 1",
+    true
+  )}
+  wherein the host would only have 1 door left to open, since the contestant chose door A, and the car is behind door C, leaving just door B to be opened.
+  Now that we have these events defined, we can define the probability of winning by <b>sticking to door A</b> : {@html katexify(
+    "\P(A|HB) = \\frac{\P(HB|A)\P(A)}{\P(HB)}",
+    true
+  )}
+  which is equivalent to : {@html katexify(
+    "\P(A|HB) = \\frac{\P(HB|A)\P(A)}{(\P(HB|A)\P(A))+(\P(HB|B)\P(B))+(\P(HB|C)\P(C))}",
+    true
+  )}
+  Therefore, we get : {@html katexify(
+    "\P(A|HB) = \\frac{(1/2)(1/3)}{(1/6)+(0)+(1/3)} = \\frac{(1/2)(1/3)}{(1/2)} = \\boxed{1/3}",
+    true
+  )}
+  We can further define the probability of winning by <b>sticking to door C</b> : {@html katexify(
+    "\P(C|HB) = \\frac{\P(HB|C)\P(C)}{\P(HB)}",
+    true
+  )}
+  which is equivalent to : {@html katexify(
+    "\P(C|HB) = \\frac{\P(HB|C)\P(C)}{(\P(HB|A)\P(A))+(\P(HB|B)\P(B))+(\P(HB|C)\P(C))}",
+    true
+  )}
+  Therefore, we get : {@html katexify(
+    "\P(A|HB) = \\frac{(1)(1/3)}{(1/6)+(0)+(1/3)} = \\frac{(1)(1/3)}{(1/2)} = \\boxed{2/3}",
+    true
+  )}
+</p>
+<p class="body-text">
+  Therefore, the strategy is <b>always to switch!</b> Continue reading to see an interactive simulation of the same!
 </p>
 </section>
 
@@ -55,7 +97,7 @@
     text-align: center;
     margin: 1rem;
     opacity: 0.75;
-    padding: 2rem;
+    padding: 1rem;
     font-family: 'Times New Roman', Times, serif;
   }
 </style>

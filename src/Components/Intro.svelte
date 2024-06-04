@@ -2,6 +2,7 @@
 </script>
 
 <section>
+  <img src="/static/monty.png" alt="Monty Hall" style="width: 400px; height: auto;" class="center"/>
   <p class="body-text">
     The Monty Hall Problem is a <a href="https://encyclopediaofmath.org/wiki/Monty_hall_problem">Probability Puzzle</a> based on the American television game show "Let's Make a Deal," hosted by Monty Hall. 
   </p>
@@ -30,6 +31,13 @@
     font-family: 'Times New Roman', Times, serif;
   }
 
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
   .body-text {
     font-size: 1.2rem;
     color: black;
@@ -38,6 +46,7 @@
     opacity: 0.85;
     padding: 1rem;
     line-height: 1.6;
+    font-family: 'Times New Roman', Times, serif;
   }
 
   a {

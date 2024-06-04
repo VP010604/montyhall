@@ -7,6 +7,19 @@
 </section>
 
 <style>
+
+  .section {
+      height: 75vh; /* Full height of the viewport */
+      overflow-y: auto; /* Enable scrolling within each section */
+      display: flex; /* Use flexbox to center content vertically */
+      flex-direction: column; /* Stack content vertically */
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically */
+      text-align: center; /* Center text horizontally */
+      padding: 10px; /* Add padding for better readability */
+      color: black; /* Text color for better readability against gradient */
+    }
+
   #intro {
     max-width: 600px;
     margin: 1rem auto;

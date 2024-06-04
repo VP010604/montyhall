@@ -10,15 +10,17 @@
   import Resources from "./Components/Resources.svelte";
   import ScrollSide from "./Components/ScrollSide.svelte";
   import Simulation from "./Components/Simulation.svelte";
+  import Visualization from "./Components/Visualization.svelte";
 </script>
 
 <Meta />
 <Title />
 <Intro />
-<TextAndMathEquations />
 <Simulation/>
+<TextAndMathEquations />
 <!--ScrollSide /-->
 <LineChart />
+<Visualization />
 <!-- ScrollCenter /-->
 <!--Conclusion /-->
 <Resources />

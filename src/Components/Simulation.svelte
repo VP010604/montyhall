@@ -29,14 +29,14 @@
         chosenDoor = doors.find(d => d !== chosenDoor && d !== hostDoor);
         switched = true;
         doorSwitched = true;
-      }, 1000); // 1 second delay
+      }, 500); // 1 second delay
     };
   
     const reveal = () => {
       setTimeout(() => {
         result = chosenDoor === winningDoor ? 'Win' : 'Lose';
         revealed = true;
-      }, 1000); // 1 second delay
+      }, 500); // 1 second delay
     };
   
     const resetGame = () => {
@@ -60,24 +60,26 @@
     }
   
     .section {
-      height: 100vh; /* Full height of the viewport */
+      height: 50vh; /* Full height of the viewport */
       overflow-y: auto; /* Enable scrolling within each section */
       display: flex; /* Use flexbox to center content vertically */
       flex-direction: column; /* Stack content vertically */
       justify-content: center; /* Center content horizontally */
       align-items: center; /* Center content vertically */
       text-align: center; /* Center text horizontally */
-      padding: 20px; /* Add padding for better readability */
-      
+      padding: 10px; /* Add padding for better readability */
       color: black; /* Text color for better readability against gradient */
     }
   
     .section h2 {
       font-size: 2.5rem; /* Larger font size for headings */
+      font-family: 'Times New Roman', Times, serif;
     }
   
     .section p {
       font-size: 1.5rem; /* Larger font size for paragraphs */
+      padding: 15px;
+      font-family: 'Times New Roman', Times, serif;
     }
   
     .doors {
@@ -88,7 +90,7 @@
   
     .door {
       cursor: pointer;
-      transition: transform 0.3s; /* Smooth transition for scaling */
+      transition: transform 0.5s; /* Smooth transition for scaling */
     }
   
     .door:hover {
@@ -116,23 +118,6 @@
       margin-top: 20px; /* Ensures spacing below the text */
     }
   </style>
-  
-  <div class="section">
-    <div>
-      <img src="/static/monty.png" alt="Monty Hall" style="width: 500px; height: auto;" />
-      <h2>Welcome to the Monty Hall Problem!</h2>
-    </div>
-    <div class="content">
-      <p>The Monty Hall problem is a brain teaser, in the form of a probability puzzle, 
-        based nominally on the American television game show Let's Make a Deal and named 
-        after its original host, Monty Hall.</p>
-      <p>Suppose you're on a game show, and you're given the choice of three doors: 
-        Behind one door is a car; behind the others, goats. You pick a door, say No. 1, 
-        and the host, who knows what's behind the doors, opens another door, say No. 3, 
-        which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it to
-        your advantage to switch your choice?</p>
-    </div>
-  </div>
   
   <div class="section">
     <div>
