@@ -37,6 +37,17 @@
         g.append("g")
             .call(d3.axisLeft(y).ticks(10).tickSize(-width));
 
+        const area = d3.area()
+            .x(d => x(d))
+            .y0(d => y(cumulativeNotSwitching[d - 1]))
+            .y1(d => y(cumulativeSwitching[d - 1]));
+
+        g.append("path")
+            .datum(games)
+            .attr("fill", "purple")
+            .attr("fill-opacity", 0.3)
+            .attr("d", area);
+
         const lineSwitching = g.append("path")
             .datum(games)
             .attr("fill", "none")
@@ -53,62 +64,114 @@
 
         // Adding a legend
         const legend = svg.append("g")
-            .attr("transform", `translate(${width - 80}, ${20})`);
+            .attr("transform", `translate(${width - 80}, ${20})`); // Adjusted position
 
         legend.append("rect")
-            .attr("width", 100)
-            .attr("height", 50)
+            .attr("width", 140) // Increased width
+            .attr("height", 70) // Increased height
             .attr("fill", "white")
             .attr("stroke", "black");
 
         legend.append("line")
             .attr("x1", 10)
-            .attr("y1", 15)
+            .attr("y1", 20)
             .attr("x2", 30)
-            .attr("y2", 15)
+            .attr("y2", 20)
             .attr("stroke", "blue")
             .attr("stroke-width", 2);
 
         legend.append("text")
             .attr("x", 35)
-            .attr("y", 15)
+            .attr("y", 20)
             .attr("dy", ".35em")
             .style("text-anchor", "start")
             .text("Switching");
 
         legend.append("line")
             .attr("x1", 10)
-            .attr("y1", 35)
+            .attr("y1", 50)
             .attr("x2", 30)
-            .attr("y2", 35)
+            .attr("y2", 50)
             .attr("stroke", "red")
             .attr("stroke-width", 2);
 
         legend.append("text")
             .attr("x", 35)
-            .attr("y", 35)
+            .attr("y", 50)
             .attr("dy", ".35em")
             .style("text-anchor", "start")
-            .text("Not Switching");
+            .text("Sticking");
 
         // Adding interactivity - highlighting and tooltip
         const focus = g.append("g").style("display", "none");
 
         focus.append("circle").attr("r", 4.5);
 
-        const tooltip = svg.append("text")
+        const tooltip = svg.append("foreignObject")
             .attr("class", "tooltip")
             .attr("x", 0)
             .attr("y", 0)
-            .style("opacity", 0)
-            .style("font-size", "12px")
-            .style("fill", "black")
-            .attr("text-anchor", "middle")
-            .attr("alignment-baseline", "middle");
+            .attr("width", 150)
+            .attr("height", 100)
+            .style("opacity", 0);
 
-        // Interaction event handlers
-        svg.on("mouseover", function() { focus.style("display", null); tooltip.style("opacity", 1); })
-            .on("mouseout", function() { focus.style("display", "none"); tooltip.style("opacity", 0); })
+        const tooltipDiv = tooltip.append("xhtml:div")
+            .style("font-size", "12px")
+            .style("background", "white")
+            .style("border", "1px solid black")
+            .style("padding", "5px")
+            .style("border-radius", "5px")
+            .style("text-align", "left");
+
+        // Adding hover effect to the area
+        g.selectAll(".area-hover")
+            .data(games)
+            .enter()
+            .append("rect")
+            .attr("class", "area-hover")
+            .attr("x", d => x(d) - 1)
+            .attr("width", 2)
+            .attr("y", 0)
+            .attr("height", height)
+            .attr("fill", "none")
+            .attr("pointer-events", "all")
+            .on("mouseover", function(event, d) {
+                focus.style("display", null);
+                tooltip.style("opacity", 1);
+            })
+            .on("mouseout", function() {
+                focus.style("display", "none");
+                tooltip.style("opacity", 0);
+            })
+            .on("mousemove", function(event, d) {
+                const mouse = d3.pointer(event);
+                const x0 = Math.round(x.invert(mouse[0]));
+                const switchWins = cumulativeSwitching[x0 - 1];
+                const stickWins = cumulativeNotSwitching[x0 - 1];
+                const difference = switchWins - stickWins;
+                const switchPercentage = ((switchWins / nGames) * 100).toFixed(2);
+                const stickPercentage = ((stickWins / nGames) * 100).toFixed(2);
+                const percentageDifference = ((difference / nGames) * 100).toFixed(2);
+
+                focus.attr("transform", `translate(${x(x0)},${y(switchWins)})`);
+                tooltip.attr("x", x(x0)).attr("y", y(switchWins) - 10);
+
+                // Adjust tooltip position if it goes beyond the right edge
+                if (x(x0) + 160 > width) {
+                    tooltip.attr("x", x(x0) - 160);
+                }
+
+                // Adjust tooltip position if it goes beyond the top edge
+                if (y(switchWins) - 90 < 0) {
+                    tooltip.attr("y", y(switchWins) + 10);
+                }
+
+                tooltipDiv.html(`
+                    <div>Switch Wins: ${switchWins} (${switchPercentage}%)</div>
+                    <div>Stick Wins: ${stickWins} (${stickPercentage}%)</div>
+                    <div>Difference: ${difference} (${percentageDifference}%)</div>
+                `);
+            });
     };
 
     onMount(runSimulation);
@@ -132,7 +195,7 @@
     display: block;
     margin: 0 auto;
   }
-  
+
   .tooltip {
     visibility: hidden;
   }
@@ -146,14 +209,12 @@
     align-items: center; /* Center content vertically */
     text-align: center; /* Center text horizontally */
     padding: 20px; /* Add padding for better readability */
-    
     color: black; /* Text color for better readability against gradient */
-    
   }
 
   .section h2 {
     font-size: 2.5rem; /* Larger font size for headings */
-    
+    font-family: 'Times New Roman', Times, serif;
   }
 
   .section p {

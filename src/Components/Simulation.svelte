@@ -15,9 +15,9 @@
     let doorSwitched = false;
   
     // Images
-    let doorImage = '/static/door.png';  // Path to the door image in the static directory
-    let goatImage = '/static/goat.png';  // Path to the goat image in the static directory
-    let carImage = '/static/car.png';    // Path to the car image in the static directory
+    let doorImage = 'static/door.png';  // Path to the door image in the static directory
+    let goatImage = 'static/goat.png';  // Path to the goat image in the static directory
+    let carImage = 'static/car.png';    // Path to the car image in the static directory
   
     const chooseDoor = (door) => {
       chosenDoor = door;

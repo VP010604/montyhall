@@ -84,7 +84,7 @@
         .text('Bootstrap Results of Stick Strategy');
 
     // Switch Strategy Histogram
-    const gSwitch = svg.append('g').attr('transform', `translate(${margin.left},${margin.top + height + margin.bottom + 80})`); // Increased vertical space
+    const gSwitch = svg.append('g').attr('transform', `translate(${margin.left},${margin.top + height + margin.bottom + 60})`); // Increased vertical space
 
     gSwitch.append('g').attr('class', 'axis axis--x').attr('transform', `translate(0,${height})`).call(d3.axisBottom(xSwitch));
     gSwitch.append('g').attr('class', 'axis axis--y').call(d3.axisLeft(ySwitch));
@@ -156,9 +156,9 @@
   <br>
   <button class="styled-button" on:click={updateHistogram}>Generate Histogram</button>
 </div>
-<svg id="histogram" width="800" height="800" style="display: block; margin: 0 auto;"></svg> <!-- Increased height for more space between histograms -->
-<div style="text-align: center; max-width: 800px; margin: 0 auto;">
-  <p>
+<svg id="histogram" width="800" height="800" style="display: block; margin: 10 auto;"></svg> <!-- Increased height for more space between histograms -->
+<div style="text-align: center; max-width: 700px; margin: 0 auto;">
+  <p class="body-text">
     The histograms above show the distribution of winning proportions for two strategies in a bootstrap analysis.
     The "Stick Strategy" histogram displays results when the initial choice is not changed, while the "Switch Strategy" histogram shows results when the choice is switched.
   </p>
@@ -187,5 +187,15 @@
     font-size: 12px;
     font-weight: bold;
     fill: black;
+  }
+
+  .body-text {
+    font-size: 1.4rem;
+    color: black;
+    text-align: center;
+    margin: 1rem;
+    opacity: 0.75;
+    padding: 1rem;
+    font-family: 'Times New Roman', Times, serif;
   }
 </style>
