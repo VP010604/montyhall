@@ -173,14 +173,13 @@
                 `);
             });
     };
-
     onMount(runSimulation);
 </script>
 
 <div class="section">
     <h2>Interactive Line Chart</h2>
     <p>Number of games: <input type="number" bind:value={nGames} min="100" max="10000" step="100" /></p>
-    <button on:click={runSimulation}>Run Simulation</button>
+    <button class = "styled-button" on:click={runSimulation}>Run Simulation</button>
     <svg id="chart"></svg>
     <p class="description">
         This chart shows the cumulative wins over multiple Monty Hall game simulations. 
@@ -227,5 +226,18 @@
     font-size: 1.2rem;
     max-width: 800px;
     font-family: 'Times New Roman', Times, serif;
+  }
+  .styled-button {
+    border: 2px solid #000;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  .styled-button:hover {
+    background-color: #e2e6ea;
   }
 </style>

@@ -1,0 +1,10 @@
+:root {
+    --start-color: #00ffdd7e; 
+    --end-color: #00ffddee; 
+  }
+  
+  body {
+    background: linear-gradient(to bottom, var(--start-color), var(--end-color));
+    transition: background 0.5s;
+  }
+  

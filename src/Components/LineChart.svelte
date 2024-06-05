@@ -46,7 +46,7 @@
         .attr('y', d => yStick(d.length))
         .attr('width', d => xStick(d.x1) - xStick(d.x0) - 1)
         .attr('height', d => height - yStick(d.length))
-        .attr('fill', 'steelblue')
+        .attr('fill', 'red')
         .attr('stroke', 'black')
         .attr('opacity', 0.6)
         .on('mouseover', function(event, d) {
@@ -97,7 +97,7 @@
         .attr('y', d => ySwitch(d.length))
         .attr('width', d => xSwitch(d.x1) - xSwitch(d.x0) - 1)
         .attr('height', d => height - ySwitch(d.length))
-        .attr('fill', 'orange')
+        .attr('fill', 'blue')
         .attr('stroke', 'black')
         .attr('opacity', 0.6)
         .on('mouseover', function(event, d) {
