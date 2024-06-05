@@ -184,8 +184,9 @@
     <p class="description">
         This chart shows the cumulative wins over multiple Monty Hall game simulations. 
         The blue line represents the cumulative wins when the contestant always switches their choice, 
-        while the red line represents the cumulative wins when the contestant never switches. 
-        As the number of games increases, you can observe that switching doors leads to more wins on average.
+        while the red line represents the cumulative wins when the contestant always sticks with their choice. 
+        The shaded region is the difference between the 2 lines. As can be seen, when N tends to a large value (~10000 iterations),
+        the switching strategy wins ~67% of the time while the sticking strategy wins only 33% of the time.
     </p>
 </div>
 

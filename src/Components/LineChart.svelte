@@ -146,6 +146,14 @@
   });
 </script>
 
+<div style="text-align: center; max-width: 600px; margin: 0 auto;">
+  <p class="body-text">
+    The following example contains bootsrapped iterations of "N" games, where N is selected by you.
+    Essentially, the simulation performs N iterations of the Monty Hall problem and records the statistics of winning by the Stick Strategy and the Switch Strategy.
+    These results were then randomly resampled (with replacement) 500 times each so as to prevent bias in the results.
+  </p>
+</div>
+
 <div style="text-align: center;">
   <label for="n-value">Select N:</label>
   <select bind:value={selectedN} id="n-value">
@@ -157,10 +165,9 @@
   <button class="styled-button" on:click={updateHistogram}>Generate Histogram</button>
 </div>
 <svg id="histogram" width="800" height="800" style="display: block; margin: 10 auto;"></svg> <!-- Increased height for more space between histograms -->
-<div style="text-align: center; max-width: 700px; margin: 0 auto;">
+<div style="text-align: center; max-width: 600px; margin: 0 auto;">
   <p class="body-text">
-    The histograms above show the distribution of winning proportions for two strategies in a bootstrap analysis.
-    The "Stick Strategy" histogram displays results when the initial choice is not changed, while the "Switch Strategy" histogram shows results when the choice is switched.
+    As can be seen, <b>it is always better to switch!</b>
   </p>
 </div>
 
